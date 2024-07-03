@@ -211,17 +211,23 @@ int main(void) {
 			key = GetKeyPressed();
 			if (key != -1 && digit[key] == '+') {
 				mode = 0; // Switch to keypad mode
+				speed = 0;
+				clearBuffer(inputBuffer, &bufferIndex);
 				LCD_command(0x01); // Clear display
 				LCD_string("Enter Speed:");
+				_delay_ms(5);
 			}
-			adc_value = ADC0808_read(0); // Read ADC value from channel 0
-			speed = adc_value; // Use ADC value as speed
-			if (speed > 255) speed = 255;
-			set_PWM(speed); // Set PWM duty cycle based on ADC value
-			LCD_set_cursor(2, 0); // Set cursor to 2nd row, 1st column
-			LCD_string("Speed: ");
-			LCD_integer(speed);
-			_delay_ms(10); // Update interval
+			else{
+				adc_value = ADC0808_read(0); // Read ADC value from channel 0
+				speed = adc_value; // Use ADC value as speed
+				if (speed > 255) speed = 255;
+				set_PWM(speed); // Set PWM duty cycle based on ADC value
+				LCD_set_cursor(2, 0); // Set cursor to 2nd row, 1st column
+				LCD_string("Speed: ");
+				LCD_integer(speed);
+				_delay_ms(10); // Update interval
+			}
+
 
 		}
 	}
