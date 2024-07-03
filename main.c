@@ -209,7 +209,7 @@ int main(void) {
 			} else if (mode == 1) { // ADC mode
 				// Check for switch back to keypad mode
 			key = GetKeyPressed();
-			if (key != -1 && digit[key] == '+') {
+			if (key != -1 && digit[key] == '-') {
 				mode = 0; // Switch to keypad mode
 				speed = 0;
 				clearBuffer(inputBuffer, &bufferIndex);
